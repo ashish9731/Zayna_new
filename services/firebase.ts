@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
 
 // ------------------------------------------------------------------
 // REAL WORLD CONFIGURATION
@@ -16,11 +17,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-// Only request basic profile and email scopes
+// Only request basic profile and email scopes to avoid sensitive permissions warning
+googleProvider.addScope('openid');
 googleProvider.addScope('profile');
 googleProvider.addScope('email');
 
-export { auth, googleProvider };
+// Set custom parameters to limit permissions
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
+export { auth, googleProvider, analytics };
