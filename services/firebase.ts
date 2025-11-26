@@ -19,8 +19,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-// Add scopes for Calendar and Contacts if needed
-googleProvider.addScope('https://www.googleapis.com/auth/calendar.events.readonly');
+// Only request basic profile and email scopes
 googleProvider.addScope('profile');
 googleProvider.addScope('email');
 
