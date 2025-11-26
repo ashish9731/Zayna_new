@@ -23,8 +23,8 @@ export const transcribeAudio = async (audioBlob: Blob): Promise<string> => {
   const base64Audio = await blobToBase64(audioBlob);
 
   try {
-    // Use a model that supports audio processing
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    // Use the correct model name format
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
     
     const prompt = "Please generate a verbatim transcription of this meeting audio. Identify different speakers if possible (e.g., Speaker 1, Speaker 2). Return ONLY the transcription texts, no preamble.";
     
@@ -51,8 +51,8 @@ export const generateMeetingMinutes = async (transcript: string, metadata: Meeti
   }
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  // Use the latest stable model
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+  // Use the correct model name format
+  const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
 
   const prompt = `
     You are Zayna, an expert executive assistant. Create a highly detailed, professional, and actionable Meeting Minutes (MoM) document based on the provided transcript and meeting details.
@@ -106,8 +106,8 @@ export const generateEmailDraft = async (mom: string, metadata: MeetingMetadata)
     }
   
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-    // Use the latest stable model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    // Use the correct model name format
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
   
     const prompt = `
       Based on the following Meeting Minutes, write a professional follow-up email to the attendees.
@@ -140,8 +140,8 @@ export const translateText = async (text: string, targetLangName: string): Promi
   }
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  // Use the latest stable model
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+  // Use the correct model name format
+  const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
 
   const prompt = `
       Translate the following text into ${targetLangName}. 
