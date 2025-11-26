@@ -23,10 +23,9 @@ export const transcribeAudio = async (audioBlob: Blob): Promise<string> => {
   const base64Audio = await blobToBase64(audioBlob);
 
   try {
-    // Use the most basic model that's known to work
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
-    const prompt = "Please generate a verbatim transcription of this meeting audio. Identify different speakers if possible (e.g., Speaker 1, Speaker 2). Return ONLY the transcription texts, no preamble.";
+    const prompt = "Please generate a verbatim transcription of this meeting audio. Identify different speakers if possible (e.g., Speaker 1, Speaker 2). Return ONLY the transcription text, no preamble.";
     
     const result = await model.generateContent([
       prompt,
@@ -51,8 +50,7 @@ export const generateMeetingMinutes = async (transcript: string, metadata: Meeti
   }
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  // Use the most basic model that's known to work
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
     You are Zayna, an expert executive assistant. Create a highly detailed, professional, and actionable Meeting Minutes (MoM) document based on the provided transcript and meeting details.
@@ -106,8 +104,7 @@ export const generateEmailDraft = async (mom: string, metadata: MeetingMetadata)
     }
   
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-    // Use the most basic model that's known to work
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   
     const prompt = `
       Based on the following Meeting Minutes, write a professional follow-up email to the attendees.
@@ -140,8 +137,7 @@ export const translateText = async (text: string, targetLangName: string): Promi
   }
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  // Use the most basic model that's known to work
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
       Translate the following text into ${targetLangName}. 
